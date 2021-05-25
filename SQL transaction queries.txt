@@ -1,0 +1,13 @@
+Qry1- 
+
+select Scan_Type_Dimension.Transaction_Type_Description, Date_Dimension.Date_Description, count(*) as Number_of_Each_Type_of_Scan  from
+Item_Scan_Fact inner join Date_Dimension on Item_Scan_Fact.Transaction_Date_Key = Date_Dimension.Date_Key
+inner join Scan_Type_Dimension on Scan_Type_Dimension.Transaction_Type_Key = Item_Scan_Fact.Transaction_Type_Key
+where Date_Dimension.Date_Description = '2000-01-29'
+group by Scan_Type_Dimension.Transaction_Type_Description,Date_Dimension.Date_Description;
+
+Qry2- 
+
+select sum(Item_Quantity) as Total_Number_of_Items_Scanned from Item_Scan_Fact
+inner join Store_Dimension on Item_Scan_Fact.Store_Key = Store_Dimension.Store_Key
+where Store_Dimension.State = 'TX';
